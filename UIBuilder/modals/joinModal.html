@@ -1,0 +1,27 @@
+
+<div class="row">
+    <div class="form-check">
+        <input class="form-check-input" name="group_by" type="radio" id="by_category">
+        <label class="form-check-label" for="by_category" style="padding-right: 20px">לפי קטגוריה</label>
+    </div>
+    <select id="options" class="form-control form-control-sm" style="padding-right: 20px">
+        <option>בחר קטגוריה</option>
+    </select>
+    <hr style="padding-top: 20px; padding-top: 20px">
+    <div class="form-check">
+        <input class="form-check-input" name="group_by" type="radio" id="group_by_text"
+            style="padding-bottom: 20px; padding-right: 20px">
+        <label class="form-check-label" for="group_by_text" style="padding-right: 20px">או לפי חיפוש (מומלץ*)</label>
+    </div>
+    <div id="group_by_text_input" class="form-control form-control-sm" type="text"></div>
+    <small>ביכולתך להזין כמה אפשרויות ע"י מקש ENTER אחרי כל אפשרות</small>
+</div>
+<br>
+<div class="row justify-content-start">
+    <div>
+        הזן כמות חברים מינמלית בקבוצה:
+    </div>
+    <div style="width: 45%; padding-right: 10px;">
+        <input type="number" value="10000" min="0" max="10000000" step="1000" />
+    </div>
+</div>

@@ -1,0 +1,124 @@
+SECURITY:
+-login to facebook with cookies (improvement of safety of user and initializing time)
+-save password in server.
+-login to app with serialN and password.
+-add proxy
+-connect from few browsers to confuse system (hiding browser signature).
+
+POSTS PAGE:
+-add 2 options:
+--1. normal post
+--2. sale post
+-add 2 options :
+--1. ctrl+c to post
+--2. text area
+-tag friends
+
+--IN MODAL:
+---scan and join all groups facebook propose
+---scan and join groups by catagory(facebook catagories)
+
+
+SERVER: 
+-add info of client actions (last time connection to app and counter for connections, how many posts, how many comments, how many likes, how many private messages).
+-count(send the counter to server) and save list of all urls to posts that have completed - this is for smart agent(follow them to add comments to comments,likes to comments and private messages to commenters).
+
+
+ADMIN:
+-new app for admin.
+-add new user.
+-edit user.
+
+
+PRODUCTION:
+-package
+-install
+
+
+REFACTORING: 
+-fix waiting - wait for load element.
+-in renderer2 split the files (collect, post, dnd).
+-upgrade to oop (js).
+
+
+
+					<div class="wrap-input100 validate-input" data-validate="דואר אלקטרוני לא תקין - נסה שוב">
+						<input class="input100" type="text" name="email" value="morcohen739@gmail.com">
+						<span class="focus-input100" data-placeholder="דואר אלקטרוני"></span>
+					</div>
+
+
+    def login_to_facebook2(self, driver, sleep):
+        """
+        * login to facebook by automation form filling and clicking.
+        * NOT IN USE
+        """
+        username_box = driver.find_element_by_id('email') 
+        username_box.send_keys(self.email) 
+        sleep(1) 
+
+        password_box = driver.find_element_by_id('pass') 
+        password_box.send_keys(self.pss) 
+        sleep(1)
+
+        login_box = driver.find_element_by_id('loginbutton') 
+        login_box.click()
+
+        title = driver.title
+        if(title.find('Log into') == -1):#connection success
+
+            facebook_success = { "status": True }
+            return facebook_success
+        else:
+            facebook_failed =  { "status":False, "err1":"החיבור אל פייסבוק נכשל - יתכן שהסיסמא אינה נכונה", "err2":"*נסה להקליד שנית את הסיסמא"}
+            return facebook_failed #server failed
+
+
+
+
+
+    def get_cookie(self, cj, cts):
+        """
+        * cj: cookie jar. cts: cookie_to_send.
+        * scan all cookies of firefox/chrome browser and look for 
+        * facebook cookie.
+        """
+        for cookie in cj:
+            if(cookie.domain == '.facebook.com'):
+                tmp = {}
+                tmp['name'] = cookie.name
+                tmp['value'] = cookie.value
+                cts.append(tmp)
+        if(len(cts) == 0):
+            raise "cookie not found"
+        else:
+            return cts
+        
+    def set_driver_cookies(self, driver):
+        cookies = pickle.load(open("cookies.pkl", "rb"))
+        try:
+            for cookie in cookies:
+                driver.add_cookie(cookie)
+            return True
+        except:
+            return False
+            
+    def login_to_facebook(self, driver, sleep):
+        """
+        * use the cookies of the user to login to facebook.
+        """
+        cookies_to_send = []
+        try:
+            c = self.get_cookie(browsercookie.chrome(),cookies_to_send)#cookie_jar and list
+            print("chrome")
+        except:    
+            c = self.get_cookie(browsercookie.firefox(),cookies_to_send)
+            print("firefox")
+        pickle.dump(c , open("cookies.pkl","wb"))
+        if(self.set_driver_cookies(driver)):    
+            driver.get(self.url)
+            facebook_success = { "status": True }
+            return facebook_success
+        else:
+            facebook_failed =  { "status":False, "err1":"החיבור אל פייסבוק נכשל - יתכן שאינך מחובר", "err2":"*פתח את דפדפן chrome או firefox והתחבר אל פייסבוק"}
+            return facebook_failed #server failed

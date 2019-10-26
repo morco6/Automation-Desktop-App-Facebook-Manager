@@ -1,0 +1,17 @@
+{
+  "name": "social-agent",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "bootstrap-input-spinner": "^1.11.8",
+    "save-file": "^2.3.1",
+    "zerorpc": "git+https://github.com/fyears/zerorpc-node.git"
+  },
+  "devDependencies": {
+    "electron": "^1.7.6",
+    "electron-packager": "^9.0.1",
+    "electron-rebuild": "^1.8.5"
+  }
+}

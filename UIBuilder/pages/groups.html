@@ -1,0 +1,246 @@
+<div class="col-md-12">
+  <table
+    class="table-sm"
+    style="background-color: #fff;"
+    id="table"
+    data-search="true"
+    data-toggle="table"
+    data-height="450"
+    data-click-to-select="true"
+    data-url="Content/groupList.json"
+  >
+    <thead style="background-color: #fff;">
+      <div class="float-right" style="padding: 10px 5px;">
+        <button
+          id="button-background"
+          class="btn btn-primary"
+          data-toggle="tooltip"
+          title="לחץ על מנת לסרוק קבוצות מפרופיל הפייסבוק שלך"
+        >
+          <div class="row">
+            <span
+              id="button-before"
+              style="padding-left: 5px; padding-right: 5px;"
+              ><i class="fas fa-search"></i> סריקה</span
+            >
+            <div id="small-spinner" class="small-spinner" hidden></div>
+            <span
+              id="counter"
+              style="padding-left: 5px; padding-right: 5px;"
+              hidden
+            ></span>
+          </div>
+        </button>
+      </div>
+      <small
+        class="float-left"
+        style="padding-top: 20px; padding-left: 5px; font-weight: bold"
+      >
+        <a id="refreshTable" href="#">
+          <i class="fas fa-sync-alt"></i> רענן טבלה
+        </a>
+        |
+        <a
+          id="save"
+          href="#"
+          data-toggle="popover"
+          data-placement="bottom"
+          title="בחר קבוצות מהרשימה ושמור בשם"
+          data-html="true"
+        >
+          <i class="fas fa-file-import"></i> שמור
+        </a>
+        |
+        <a
+          id="open"
+          href="#"
+          data-toggle="popover"
+          data-placement="bottom"
+          title="בחר רשימת קבוצות ופתח"
+          data-html="true"
+        >
+          <i class="fas fa-file-export"></i> פתח
+        </a>
+      </small>
+      <tr>
+        <th data-field="state" data-checkbox="true"></th>
+        <th class="text-right" data-field="pic">תמונה</th>
+        <th class="text-right" data-field="name">שם הקבוצה</th>
+        <th class="text-right" data-field="status">סטטוס</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <small id="howMany" style="padding-right: 15px;"></small>
+    <br />
+    <small style="padding-right: 15px; padding-top: 5px">
+      <a href="#" id="join_button" style="color: #0062cc">
+        <i class="far fa-hand-point-left"></i>
+        לחץ כדי להצטרף אוטומטית לקבוצות נוספות
+      </a>
+    </small>
+  </div>
+  <div class="col-md-2 mr-auto" style="padding-right: 50px; padding-top: 10px;">
+    <button id="post-button" class="btn btn-primary">
+      <div class="row">
+        <span style="padding-left: 5px; padding-right: 5px;">
+          <i class="fas fa-comment-medical"></i>
+          פוסט רגיל
+        </span>
+      </div>
+    </button>
+  </div>
+  <div class="col-md-2 mr-auto" style="padding-right: 18px; padding-top: 10px;">
+    <button
+      id="button-sale"
+      class="btn btn-primary"
+      data-toggle="tooltip"
+      title="לחץ כדי להזין פוסט מכירה"
+    >
+      <div class="row">
+        <span style="padding-left: 5px; padding-right: 5px;"
+          ><i class="fas fa-comment-dollar"></i> פוסט מכירה</span
+        >
+      </div>
+    </button>
+  </div>
+  <div class="col-md-2 mr-auto">
+    <div class="row" style="padding-top: 10px;">
+      <button
+        id="runPostBTN"
+        class="btn btn-secondary"
+        data-toggle="tooltip"
+        title="פרסם עכשיו!"
+      >
+        <div class="row">
+          <span
+            id="button-before2"
+            style="padding-left: 5px; padding-right: 5px;"
+          >
+            <i class="far fa-play-circle"></i> הפעל
+          </span>
+          <div style="padding-right: 5px;">
+            <div id="small-spinner2" class="small-spinner2" hidden></div>
+          </div>
+        </div>
+      </button>
+      <button
+        id="stop_button"
+        class="btn btn-danger"
+        data-toggle="tooltip"
+        title="לחץ כדי לעצור את הריצה (הריצה תיעצר בסיום התהליך הנוכחי)"
+        hidden
+      >
+        <div class="row">
+          <div style="padding-right: 15px;">
+            <div id="small-spinner3" class="small-spinner2"></div>
+          </div>
+          <span
+            id="button-before3"
+            style="padding-left: 15px; padding-right: 5px;"
+            >עצור</span
+          >
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-2">
+    <small
+      >*
+      <a
+        href="#"
+        id="instructionsBtn"
+        style="font-weight: bold; text-decoration-line: underline"
+      >
+        הוראות הפעלה</a
+      >
+    </small>
+  </div>
+  <div class="col-10 text-left">
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="inlineCheckbox1"
+        value="option1"
+        style="padding-top: 20px;"
+      />
+      <label
+        class="form-check-label"
+        for="inlineCheckbox1"
+        style="padding-right: 20px"
+        data-toggle="tooltip"
+        title="בסיום הפרסום תתבצע תגובה אוטומטית לכל תגובה על כל פוסט שפירסמת (לחץ כיד להזין תגובה)"
+      >
+        <i class="fas fa-comment-alt"></i>
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="inlineCheckbox2"
+        value="option2"
+        style="padding-top: 20px;"
+      />
+      <label
+        class="form-check-label"
+        for="inlineCheckbox2"
+        style="padding-right: 20px"
+        data-toggle="tooltip"
+        title="בסיום הפרסום יתבצע לייק אוטומטי לכל תגובה על כל פוסט שפירסמת"
+      >
+        <i class="fas fa-thumbs-up"></i>
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="inlineCheckbox3"
+        value="option3"
+        style="padding-top: 20px;"
+      />
+      <label
+        class="form-check-label"
+        for="inlineCheckbox3"
+        style=" padding-right: 20px"
+        data-toggle="tooltip"
+        title="בסיום הפרסום תישלח הודעה פרטית לכל משתמש שהגיב על כל פוסט שפירסמת (לחץ כדי להזין הודעה)"
+      >
+        <i class="fab fa-facebook-messenger"></i>
+      </label>
+    </div>
+  </div>
+</div>
+
+<div
+  id="instructionsModal"
+  class="modal modal-edu-general fullwidth-popup-InformationproModal PrimaryModal-bgcolor fade"
+  role="dialog"
+></div>
+<div
+  id="join_modal"
+  class="modal modal-edu-general fullwidth-popup-InformationproModal PrimaryModal-bgcolor fade"
+  role="dialog"
+  data-backdrop="static"
+  data-keyboard="false"
+></div>
+<div
+  id="post-modal"
+  class="modal modal-edu-general fullwidth-popup-InformationproModal PrimaryModal-bgcolor fade"
+  role="dialog"
+  data-backdrop="static"
+  data-keyboard="false"
+></div>
+<div
+  id="dragNdropModal"
+  class="modal modal-edu-general fade"
+  role="dialog"
+  style="padding-top: 100px"
+></div>
