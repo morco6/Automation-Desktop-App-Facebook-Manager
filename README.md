@@ -1,6 +1,7 @@
 # Automation-Desktop-App-Facebook-Manager
 
 This project is still in progress**
+For screenshots and more details: http://www.morc.io/Automation%20Desktop%20App%20-%20Facebook%20Manager
 
 ## Social Agent is a desktop application built in python for back-end and Node.js (Electron.js) for the GUI (front-end).
 
